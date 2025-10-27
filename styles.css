@@ -101,16 +101,36 @@ body {
 
 .nav-toggle {
     display: none;
-    flex-direction: column;
+    width: 44px;
+    height: 44px;
+    position: relative;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .bar {
+    position: absolute;
+    left: 50%;
+    top: 50%;
     width: 25px;
     height: 3px;
     background: #e0e0e0;
-    margin: 3px 0;
-    transition: 0.3s;
+    border-radius: 2px;
+    transform-origin: center;
+    transition: transform 0.25s cubic-bezier(.2,.7,.2,1), opacity 0.18s ease;
+}
+
+/* initial stacked positions (centered horizontally, offset vertically) */
+.nav-toggle .bar:nth-child(1) {
+    transform: translate(-50%, -10px);
+}
+
+.nav-toggle .bar:nth-child(2) {
+    transform: translate(-50%, 0);
+}
+
+.nav-toggle .bar:nth-child(3) {
+    transform: translate(-50%, 10px);
 }
 
 /* Hero Section */
@@ -754,18 +774,22 @@ section {
 
     .nav-toggle {
         display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Active -> form perfect centered X */
+    .nav-toggle.active .bar:nth-child(1) {
+        transform: translate(-50%, -50%) rotate(45deg);
     }
 
     .nav-toggle.active .bar:nth-child(2) {
+        transform: translate(-50%, -50%) scaleX(0.1);
         opacity: 0;
     }
 
-    .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-
     .nav-toggle.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+        transform: translate(-50%, -50%) rotate(-45deg);
     }
 
     .hero-container {
